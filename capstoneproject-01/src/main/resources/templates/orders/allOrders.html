@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+
+						<div class="title">
+							<h2>Platillos</h2>
+						</div>
+
+						<table class="table table-responsive highlight">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Precio</th>
+									<th>Ingredientes</th>
+
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order : ${ordersList}">
+									<td th:text="${order.name}"></td>
+									<td th:text="${order.price}"></td>
+									<td th:text="${order.ingredients}"></td>
+
+									<td><a
+										th:href="@{/orders/{id}(id=${order.id})}"><i
+											class="fab fa-readme"></i></a></td>
+									<td><a
+										th:href="@{/orders/{id}/edit(id=${order.id})}"><i
+											class="far fa-edit"></i></a></td>
+									<td><a
+										th:href="@{/orders/{id}/delete(id=${order.id})}"><i
+											class="fas fa-trash-alt"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<br> &nbsp;&nbsp;&nbsp; <br>
+			
+			<div class="container">
+				<th:block th:include="fragments/paginationOrder"></th:block>			
+			</div>			
+
+		</div>
+	</div>
+
+
+
+
+
+	<th:block th:include="fragments/footer"></th:block>
+
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

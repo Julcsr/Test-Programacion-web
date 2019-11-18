@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>Editar Empleados</h2>
+						</div>
+
+						<form th:object="${employee}"
+							th:action="@{/employees/{id}/update(id=${employee.id})}"
+							th:method="post">
+
+							<div class="alert alert-danger" th:if="${error!=null}"
+								th:text="${error}"></div>
+
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+							</div>
+
+							<div class="form-group invisible">
+								<input th:field="*{id}" id="id" type="text"
+									class="form-control validate"> <label for="author">employeeId</label>
+							</div>
+
+							<div class="form-group">
+								<input th:field="*{name}" id="name" type="text"
+									class="form-control validate"> <label for="name">Nombre</label>
+								<span class="text-danger errorMsg"
+								    th:if="${#fields.hasErrors('name')}" th:errors="*{name}">								
+								</span>
+								
+							</div>
+							
+														<div class="form-group">
+								<input th:field="*{apellidoPaterno}" id="apellidoPaterno" type="text"
+									class="form-control validate"> <label for="apellidoPaterno">Apellido Paterno</label>
+								<span class="text-danger errorMsg"
+								    th:if="${#fields.hasErrors('apellidoPaterno')}" th:errors="*{apellidoPaterno}">								
+								</span>
+								
+							</div>
+							
+														<div class="form-group">
+								<input th:field="*{apellidoMaterno}" id="apellidoMaterno" type="text"
+									class="form-control validate"> <label for="apellidoMaterno">Apellido Materno</label>
+								<span class="text-danger errorMsg"
+								    th:if="${#fields.hasErrors('apellidoMaterno')}" th:errors="*{apellidoMaterno}">								
+								</span>
+								
+							</div>
+
+							<div class="form-group">
+								<input th:field="*{dni}" id="dni" type="text"
+									class="form-control validate"> <label for="dni">DNI</label>
+								
+							</div>
+
+							<div class="form-group">
+								<label for="position">Cargo</label>
+								<select id="position" class="form-control" th:field="*{position}">
+									<option th:each="position : ${positions}" 
+										th:text="${position.name}" th:value="${position.id}">
+									</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="office">Sucursal</label>
+								<select id="office" class="form-control" th:field="*{office}">
+									<option th:each="office : ${offices}"
+										th:text="${office.adress}" th:value="${office.id}"></option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-dark">Guardar</button>
+							<a class="btn btn-primary" th:href="@{'/employees'}">Cancelar</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

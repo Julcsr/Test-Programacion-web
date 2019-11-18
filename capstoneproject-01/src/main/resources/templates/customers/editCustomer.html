@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>Editar Cliente</h2>
+						</div>
+
+						<form th:object="${customer}"
+							th:action="@{/customers/{id}/update(id=${customer.id})}"
+							th:method="post">
+
+							<div class="alert alert-danger" th:if="${error!=null}"
+								th:text="${error}"></div>
+
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+								<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+							</div>
+
+							<div class="form-group">
+								<input th:field="*{name}" id="name" type="text"
+									class="form-control validate"> <label for="name">Cliente</label>
+								<span class="text-danger errorMsg"
+								    th:if="${#fields.hasErrors('name')}" th:errors="*{name}">								
+								</span>
+							</div>
+
+							<div class="form-group">
+								<input th:field="*{apellidoPaterno}" id="apellidoPaterno" type="text"
+									class="form-control validate"> <label for="apellidoPaterno">Apellido Paterno</label>
+								
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{apellidoMaterno}" id="apellidoMaterno" type="text"
+									class="form-control validate"> <label for="apellidoMaterno">Apellido Materno</label>
+								
+							</div>
+
+							<div class="form-group">
+								<textarea th:field="*{phone}" id="phone"
+									class="form-control"></textarea>
+								<label for="phone">Telefono</label> 
+								
+							</div>
+							
+							<div class="form-group">
+								<textarea th:field="*{email}" id="email"
+									class="form-control"></textarea>
+								<label for="email">Telefono</label> 
+								
+							</div>
+							
+								<div class="form-group">
+								<textarea th:field="*{address}" id="address"
+									class="form-control"></textarea>
+								<label for="address">Telefono</label> 
+								
+							</div>
+
+							<button type="submit" class="btn btn-dark">Guardar</button>
+							<a class="btn btn-primary" th:href="@{'/customers'}">Cancelar</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

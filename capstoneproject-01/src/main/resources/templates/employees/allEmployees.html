@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+
+						<div class="title">
+							<h2>Empleados</h2>
+						</div>
+
+						<table class="table table-responsive highlight">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Apellido Paterno</th>
+									<th>Apellido Materno</th>
+									<th>Dni</th>
+									<th>Posicion</th>
+									<th>Sucursal</th>
+
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="employee : ${employeesList}">
+									<td th:text="${employee.name}"></td>
+									<td th:text="${employee.apellidoPaterno}"></td>
+									<td th:text="${employee.apellidoMaterno}"></td>
+									<td th:text="${employee.dni}"></td>
+									<td th:text="${employee.position.name}"></td>
+									<td th:text="${employee.office.adress}"></td>
+
+									<td><a
+										th:href="@{/employees/{id}(id=${employee.id})}"><i
+											class="fab fa-readme"></i></a></td>
+									<td><a
+										th:href="@{/employees/{id}/edit(id=${employee.id})}"><i
+											class="far fa-edit"></i></a></td>
+									<td><a
+										th:href="@{/employees/{id}/delete(id=${employee.id})}"><i
+											class="fas fa-trash-alt"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<br> &nbsp;&nbsp;&nbsp; <br>
+			
+			<div class="container">
+				<th:block th:include="fragments/paginationEmployee"></th:block>			
+			</div>			
+
+		</div>
+	</div>
+
+
+
+
+
+	<th:block th:include="fragments/footer"></th:block>
+
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

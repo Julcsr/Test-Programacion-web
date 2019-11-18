@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+<th:block th:include="fragments/navbarTransparent"></th:block>
+
+<div class="main">
+    <th:block th:include="fragments/navbarPrimary"></th:block>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12">
+                    <div class="title">
+                        <h2 th:text="'Cliente:'+' '+${delivery.customer.name}+' '+${delivery.customer.apellidoPaterno}+' '+${delivery.customer.apellidoMaterno}"></h2>
+                    </div>
+					<p th:text="'Telefono del cliente:'+' '+${delivery.customer.phone}"></p>
+                    <p th:text="'Direccion de envio:'+' '+${delivery.customer.address}"></p>
+                    <p th:text="'Motorizado:'+' '+${delivery.motorized.name}+' '+${delivery.motorized.apellidoPaterno}"></p>
+                    <p th:text="'Recepcionista:'+' '+${delivery.recepcionist.name}+' '+${delivery.recepcionist.apellidoPaterno}"></p>
+                    <br>	<p th:text="'Orden:'"></p>
+                    <td><th:block th:each="order : ${delivery.orders}">
+									<span th:text="${order.name} + ', '"></span>
+								</th:block>
+					</td>
+					<p th:text="'Monto Total: '+${delivery.monto}"></p>
+                </div>
+            </div>
+            &nbsp;
+            &nbsp;
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12"  sec:authorize="isAuthenticated()">
+                    <a th:href="@{'/deliverys/' + ${delivery.id} + '/edit'}"
+                       class="btn btn-primary">Editar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="fragments/footer"></th:block>
+<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

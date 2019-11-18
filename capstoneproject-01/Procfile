@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar  target/capstoneproject-01-0.0.1-SNAPSHOT.war
